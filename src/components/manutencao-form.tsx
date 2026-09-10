@@ -12,6 +12,7 @@ import {
   enviarFoto,
   urlAssinada,
   type ManutencaoCompleta,
+  type ManutencaoFoto,
 } from "@/lib/dados";
 import { moeda, paraInputDateTime } from "@/lib/format";
 import { Button } from "@/components/ui/button";
@@ -204,7 +205,7 @@ export function ManutencaoForm({ inicial }: { inicial?: ManutencaoCompleta }) {
       if (!manutencaoId) manutencaoId = await persistir("rascunho");
       if (!manutencaoId) return;
 
-      const novas = [];
+      const novas: ManutencaoFoto[] = [];
       for (const arquivo of Array.from(arquivos)) {
         const caminho = await enviarFoto(sessao.data.id, manutencaoId, arquivo);
         const { data, error } = await supabase
