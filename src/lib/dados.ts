@@ -39,8 +39,11 @@ export const sessaoQuery = queryOptions({
 
 export const empresaQuery = queryOptions({
   queryKey: ["empresa"],
-  queryFn: async () =>
-    ok(await supabase.from("empresa").select("*").order("updated_at").limit(1).maybeSingle()),
+  queryFn: async () => {
+    const res = await supabase.from("empresa").select("*").order("updated_at").limit(1);
+    if (res.error) throw new Error(res.error.message);
+    return (res.data?.[0] ?? null) as Empresa | null;
+  },
 });
 
 export const contratosQuery = queryOptions({
