@@ -14,6 +14,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedManutencoesIndexRouteImport } from './routes/_authenticated/manutencoes/index'
+import { Route as AuthenticatedManutencoesIdRouteImport } from './routes/_authenticated/manutencoes/$id'
+import { Route as AuthenticatedManutencoesNovaRouteImport } from './routes/_authenticated/manutencoes/nova'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,17 +42,33 @@ const AuthenticatedManutencoesIndexRoute =
     path: '/manutencoes/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedManutencoesIdRoute =
+  AuthenticatedManutencoesIdRouteImport.update({
+    id: '/manutencoes/$id',
+    path: '/manutencoes/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedManutencoesNovaRoute =
+  AuthenticatedManutencoesNovaRouteImport.update({
+    id: '/manutencoes/nova',
+    path: '/manutencoes/nova',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/manutencoes/$id': typeof AuthenticatedManutencoesIdRoute
+  '/manutencoes/nova': typeof AuthenticatedManutencoesNovaRoute
   '/manutencoes/': typeof AuthenticatedManutencoesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/manutencoes/$id': typeof AuthenticatedManutencoesIdRoute
+  '/manutencoes/nova': typeof AuthenticatedManutencoesNovaRoute
   '/manutencoes': typeof AuthenticatedManutencoesIndexRoute
 }
 export interface FileRoutesById {
@@ -59,19 +77,35 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/manutencoes/$id': typeof AuthenticatedManutencoesIdRoute
+  '/_authenticated/manutencoes/nova': typeof AuthenticatedManutencoesNovaRoute
   '/_authenticated/manutencoes/': typeof AuthenticatedManutencoesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/painel' | '/manutencoes/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/painel'
+    | '/manutencoes/$id'
+    | '/manutencoes/nova'
+    | '/manutencoes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/painel' | '/manutencoes'
+  to:
+    | '/'
+    | '/auth'
+    | '/painel'
+    | '/manutencoes/$id'
+    | '/manutencoes/nova'
+    | '/manutencoes'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/painel'
+    | '/_authenticated/manutencoes/$id'
+    | '/_authenticated/manutencoes/nova'
     | '/_authenticated/manutencoes/'
   fileRoutesById: FileRoutesById
 }
@@ -118,16 +152,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedManutencoesIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/manutencoes/$id': {
+      id: '/_authenticated/manutencoes/$id'
+      path: '/manutencoes/$id'
+      fullPath: '/manutencoes/$id'
+      preLoaderRoute: typeof AuthenticatedManutencoesIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/manutencoes/nova': {
+      id: '/_authenticated/manutencoes/nova'
+      path: '/manutencoes/nova'
+      fullPath: '/manutencoes/nova'
+      preLoaderRoute: typeof AuthenticatedManutencoesNovaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedManutencoesIdRoute: typeof AuthenticatedManutencoesIdRoute
+  AuthenticatedManutencoesNovaRoute: typeof AuthenticatedManutencoesNovaRoute
   AuthenticatedManutencoesIndexRoute: typeof AuthenticatedManutencoesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedManutencoesIdRoute: AuthenticatedManutencoesIdRoute,
+  AuthenticatedManutencoesNovaRoute: AuthenticatedManutencoesNovaRoute,
   AuthenticatedManutencoesIndexRoute: AuthenticatedManutencoesIndexRoute,
 }
 
