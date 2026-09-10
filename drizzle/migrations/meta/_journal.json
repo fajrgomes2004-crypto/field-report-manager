@@ -8,6 +8,13 @@
       "when": 1789074294394,
       "tag": "0000_sistema_manutencoes_inicial",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789074333337,
+      "tag": "0001_politicas_storage",
+      "breakpoints": true
     }
   ]
 }
