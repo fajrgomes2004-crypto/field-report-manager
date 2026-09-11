@@ -11,6 +11,7 @@ import {
   tecnicosQuery,
   urlAssinada,
   type ManutencaoCompleta,
+  type FiltroManutencoes,
 } from "@/lib/dados";
 import { dataCurta, dataHora, moeda, numero, hojeISO, primeiroDiaDoMes } from "@/lib/format";
 import { Button } from "@/components/ui/button";
