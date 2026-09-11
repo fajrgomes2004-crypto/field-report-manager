@@ -70,7 +70,10 @@ function EmpresaConfig() {
         if (res.error) throw new Error(res.error.message);
         return;
       }
-      const res = await supabase.from("empresa").update(payload).eq("id", empresa.id);
+      const res = await supabase
+        .from("empresa")
+        .update(payload as { razao_social?: string })
+        .eq("id", empresa.id);
       if (res.error) throw new Error(res.error.message);
     },
     onSuccess: () => {
