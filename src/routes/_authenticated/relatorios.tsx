@@ -68,12 +68,12 @@ function Relatorios() {
   const [de, setDe] = useState(primeiroDiaDoMes());
   const [ate, setAte] = useState(hojeISO());
 
-  const filtro = {
-    contratoId: contratoId || undefined,
-    localId: localId === TODOS ? undefined : localId,
+  const filtro: FiltroManutencoes = {
     de,
     ate,
     status: "concluida",
+    ...(contratoId ? { contratoId } : {}),
+    ...(localId !== TODOS ? { localId } : {}),
   };
   const manutencoes = useQuery({
     ...manutencoesQuery(filtro),
