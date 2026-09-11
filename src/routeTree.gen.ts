@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedContratosRouteImport } from './routes/_authenticated/contratos'
+import { Route as AuthenticatedEmpresaRouteImport } from './routes/_authenticated/empresa'
 import { Route as AuthenticatedLocaisRouteImport } from './routes/_authenticated/locais'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedServicosRouteImport } from './routes/_authenticated/servicos'
@@ -37,6 +38,11 @@ const AuthRoute = AuthRouteImport.update({
 const AuthenticatedContratosRoute = AuthenticatedContratosRouteImport.update({
   id: '/contratos',
   path: '/contratos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEmpresaRoute = AuthenticatedEmpresaRouteImport.update({
+  id: '/empresa',
+  path: '/empresa',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedLocaisRoute = AuthenticatedLocaisRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contratos': typeof AuthenticatedContratosRoute
+  '/empresa': typeof AuthenticatedEmpresaRoute
   '/locais': typeof AuthenticatedLocaisRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos': typeof AuthenticatedServicosRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contratos': typeof AuthenticatedContratosRoute
+  '/empresa': typeof AuthenticatedEmpresaRoute
   '/locais': typeof AuthenticatedLocaisRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos': typeof AuthenticatedServicosRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/contratos': typeof AuthenticatedContratosRoute
+  '/_authenticated/empresa': typeof AuthenticatedEmpresaRoute
   '/_authenticated/locais': typeof AuthenticatedLocaisRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/servicos': typeof AuthenticatedServicosRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contratos'
+    | '/empresa'
     | '/locais'
     | '/painel'
     | '/servicos'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contratos'
+    | '/empresa'
     | '/locais'
     | '/painel'
     | '/servicos'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/contratos'
+    | '/_authenticated/empresa'
     | '/_authenticated/locais'
     | '/_authenticated/painel'
     | '/_authenticated/servicos'
@@ -179,6 +191,13 @@ declare module '@tanstack/react-router' {
       path: '/contratos'
       fullPath: '/contratos'
       preLoaderRoute: typeof AuthenticatedContratosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/empresa': {
+      id: '/_authenticated/empresa'
+      path: '/empresa'
+      fullPath: '/empresa'
+      preLoaderRoute: typeof AuthenticatedEmpresaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/locais': {
@@ -228,6 +247,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedContratosRoute: typeof AuthenticatedContratosRoute
+  AuthenticatedEmpresaRoute: typeof AuthenticatedEmpresaRoute
   AuthenticatedLocaisRoute: typeof AuthenticatedLocaisRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedServicosRoute: typeof AuthenticatedServicosRoute
@@ -238,6 +258,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedContratosRoute: AuthenticatedContratosRoute,
+  AuthenticatedEmpresaRoute: AuthenticatedEmpresaRoute,
   AuthenticatedLocaisRoute: AuthenticatedLocaisRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedServicosRoute: AuthenticatedServicosRoute,
